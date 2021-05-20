@@ -1,6 +1,3 @@
-# csv to list: https://www.codespeedy.com/csv-to-list-in-python/
-import csv
-
 with open('on_stn_codes.csv') as stn:
     reader = csv.reader(stn)
     my_list = list(reader)
@@ -31,21 +28,35 @@ print(list4)
 
 count = 0
 
-with open("SCRIBE.NWCSTG.05.08.14Z.txt", "r") as file:  
+header = ['STN', 'DATE','HR', 'TEMP']
+
+with open("SCRIBE.NWCSTG.05.08.14Z.txt", "r") as file, open("current_weather.csv", "w", encoding='UTF8', newline='') as new_file:  
+    
+    writer = csv.writer(new_file)
+    writer.writerow(header)
     
     for line in file:
 
         try:
             if line[5:9] in list4:
                 count += 1
-                print(f'line {count}: {line[5:9]}', end='')
+                print(f'Line {count}: STN {line[5:9]}', end='')
                 print("")
-                for x in range(29):
+                for x in range(26):
                     next(file)
-                    #print(file.readline())
+
+                current = file.readline()
+                print(f'Date: {current[0:8]}')
+                print(f'Hour: {current[9:13]}')    
+                print(f'Temp: {current[65:70]}')
+                
+                writer.writerow([line[5:9], current[0:8], current[9:13], current[65:70].replace(" ", "")])
+                
+                #print(f'temp: {file.readline[5:9]}', end='')
+                
         
         except IndexError:
-           for x in range(30):
+            for x in range(30):
                 next(file)
     
     
