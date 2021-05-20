@@ -1,3 +1,5 @@
+import csv
+
 with open('on_stn_codes.csv') as stn:
     reader = csv.reader(stn)
     my_list = list(reader)
