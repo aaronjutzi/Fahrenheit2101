@@ -100,12 +100,11 @@ list5 = [i for i in list3 if len(i) == 4]
 
 list4.extend(list5)
 
+
 count = 0
 
-weather_file = txt_file.replace(".txt", ".csv")
-
 txt_file2 = txt_file.replace('"',"")
-weather_file = weather_file.replace('"',"")
+
 
 # Connect to the PostgreSQL database server
 
@@ -115,7 +114,7 @@ postgresConnection = psycopg2.connect("dbname=ontario_weather user=postgres pass
 
 cursor = postgresConnection.cursor()
 
-name_Table = txt_file.replace(".txt", "")
+name_Table = txt_file.replace(".txt", "").replace(".", "")
 
 # Create table statement
 
@@ -136,8 +135,9 @@ with open(txt_file2, "r") as file:
                 for x in range(26):
                     next(file)
                 current = file.readline()
+                #sqlInsert = ("INSERT INTO "+name_Table+" (STN, DATE, HOUR, TEMP, WIND) VALUES ("+(line[5:9])+", "+current[0:8]+", "+current[9:13]+", "+current[65:70].replace(" ", "")+", "+current[81:84].replace(" ", "")+")").format()
                 sqlInsert = sql.SQL("INSERT INTO {name} (STN, DATE, HOUR, TEMP, WIND) VALUES({one}, {two}, {three}, {four}, {five})".format(
-                    name = name_Table, one = ("'"+(line[5:9])+"'"), 
+                    name = name_Table, one = ("'"+(line[5:9].replace(" ", ""))+"'"), 
                 two = (current[0:8]), three = (current[9:13]), four = (current[65:70].replace(" ", "")), 
                 five= (current[81:84].replace(" ", ""))))
 
@@ -146,6 +146,11 @@ with open(txt_file2, "r") as file:
         except IndexError:
             for x in range(30):
                 next(file)
+
+
+sqlAlter = "UPDATE "+name_Table+" SET GEOM = ST_SetSRID(ST_MakePoint(ws.lon, ws.lat), 4326) FROM ws WHERE ws.id = "+name_Table+".stn;"
+
+cursor.execute(sqlAlter)
 
 postgresConnection.commit()
 
