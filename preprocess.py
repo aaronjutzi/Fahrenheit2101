@@ -118,7 +118,7 @@ name_Table = txt_file.replace(".txt", "").replace(".", "")
 
 # Create table statement
 
-sqlCreateTable = "create table "+name_Table+" (STN VARCHAR(4), DATE VARCHAR(8), HOUR VARCHAR(4), TEMP FLOAT, WIND FLOAT);"
+sqlCreateTable = "create table "+name_Table+" (STN VARCHAR(4), DATE VARCHAR(8), HOUR VARCHAR(4), TEMP FLOAT, WIND FLOAT, GEOM GEOMETRY(Point, 4326));"
 
 # Create a table in PostgreSQL database
 
