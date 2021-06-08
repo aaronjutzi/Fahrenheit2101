@@ -36,7 +36,7 @@ hour = now[11:13]
 
 url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
 
-local_file = url[45:]
+local_file = str('C:\CollaborativeProject\output\\results\\' + 'url[45:]')
 
 try:
     request.urlretrieve(url, local_file)
