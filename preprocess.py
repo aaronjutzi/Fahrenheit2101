@@ -18,9 +18,6 @@ import psycopg2
 
 from psycopg2 import sql
 
-
-
-
 start_time = time.time()
 
 
@@ -50,14 +47,14 @@ except error:
         if len(hour) == 3:
             hour = hour[1:]
         url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
-        local_file = url[45:]
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
         request.urlretrieve(url, local_file)
         
             
     elif int(hour) == 0:
             hour = "23"
             url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
-            local_file = url[45:]
+            local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
             request.urlretrieve(url, local_file)
 
 
@@ -68,15 +65,19 @@ except error:
 
 # creating variables to add into the command line code using string manipulation
 unzipped = str('"' + local_file.replace(".Z", "") + '"')
-txt_file = str('"' + local_file.replace("n.Z", "txt") + '"')
-
+txt_file = local_file.replace("n.Z", "txt")
+print(txt_file)
+txt_file = txt_file[39:]
+print(txt_file)
+txt_file = str('"' + txt_file + '"')
+print(txt_file)
 # setting up a command line code to unzip files using 7zip
 # the output file path will need to be congifured
 one = str('7z e ' + local_file + ' -oC:\CollaborativeProject\output\\results')
 
 # setting up a command line code to rename the unzipped file into a txt file
 two = str('rename ' + unzipped + " " + txt_file)
-
+print(two)
 subprocess.run(one, shell=True)
 subprocess.run(two, shell=True)
 
@@ -111,7 +112,9 @@ list4.extend(list5)
 
 count = 0
 
-txt_file2 = txt_file.replace('"',"")
+txt_file2 = str('C:\CollaborativeProject\output\\results\\' + txt_file.replace('"',""))
+
+print(txt_file2)
 
 
 # Connect to the PostgreSQL database server
@@ -121,9 +124,9 @@ postgresConnection = psycopg2.connect("dbname=ontario_weather user=postgres pass
 # Get cursor object from the database connection
 
 cursor = postgresConnection.cursor()
-
+print(txt_file)
 name_Table = txt_file.replace(".txt", "").replace(".", "")
-
+print(name_Table)
 # Create table statement
 
 sqlCreateTable = "create table "+name_Table+" (STN VARCHAR(4), DATE VARCHAR(8), HOUR VARCHAR(4), TEMP FLOAT, WIND FLOAT, GEOM GEOMETRY(Point, 4326));"
@@ -163,9 +166,9 @@ cursor.execute(sqlAlter)
 postgresConnection.commit()
 
 
-weather_file = txt_file.replace(".txt", ".csv")
+weather_file = txt_file2.replace(".txt", ".csv")
 
-txt_file2 = txt_file.replace('"',"")
+#txt_file2 = txt_file.replace('"',"")
 weather_file = weather_file.replace('"',"")
 
 
