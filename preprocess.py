@@ -41,6 +41,9 @@ try:
     request.urlretrieve(url, local_file)
 
 except error:
+    
+    # Error checks for hours 
+    
     if int(hour) > 1 and int(hour) <= 23:
         
         hour = str("0" + str(int(hour) - 1))
@@ -52,11 +55,93 @@ except error:
         
             
     elif int(hour) == 0:
-            hour = "23"
-            url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
-            local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
-            request.urlretrieve(url, local_file)
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
 
+    elif int(hour) == 1:
+        hour = "00"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+    # Month error checks
+
+    # January
+    elif (int(month) == 1 and int(day) == 1 and int(hour) == 0):
+        month = "12"
+        day = "31"
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+    # March
+    elif (int(month) == 3 and int(day) == 1 and int(hour) == 0):
+        month = "02"
+        day = "28"
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+
+    # April, June, and September
+    elif (int(month) == 4 and int(day) == 1 and int(hour) == 0 
+    or int(month) == 6 and int(day) == 1 and int(hour) == 0
+    or int(month) == 9 and int(day) == 1 and int(hour) == 0):
+        month = str("0" + str(int(month) - 1))
+        day = "31"
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+    # August
+    elif (int(month) == 8 and int(day) == 1 and int(hour) == 0):
+        month = "07"
+        day = "31"
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+
+    # November
+    elif (int(month) == 11 and int(day) == 1 and int(hour) == 0):
+        month = "10"
+        day = "31"
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+    # December
+    elif (int(month) == 12 and int(day) == 1 and int(hour) == 0):
+        month = "11"
+        day = "30"
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+
+     
+    elif (int(month) == 5 and int(day) == 1 and int(hour) == 0
+    or int(month) == 7 and int(day) == 1 and int(hour) == 0 
+     
+    or int(month) == 10 and int(day) == 1 and int(hour) == 0):
+        month = str(str(int(month) - 1))
+        day = "30"
+        hour = "23"
+        url = str('https://dd.weather.gc.ca/nowcasting/matrices/SCRIBE.NWCSTG.' + month + '.' + day + '.' + hour + 'Z.n.Z')
+        local_file = str('C:\CollaborativeProject\output\\results\\' + url[45:])
+        request.urlretrieve(url, local_file)
+
+    
+
+    
 
 
 
