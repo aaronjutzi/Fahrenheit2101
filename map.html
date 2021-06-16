@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<!-- Bootsrap Links -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""/>
@@ -19,7 +25,8 @@
   <script src="https://unpkg.com/esri-leaflet@3.0.1/dist/esri-leaflet.js"
     integrity="sha512-JmpptMCcCg+Rd6x0Dbg6w+mmyzs1M7chHCd9W8HPovnImG2nLAQWn3yltwxXRM7WjKKFFHOAKjjF2SC4CgiFBg=="
     crossorigin=""></script>
-
+   
+    
   <!-- Load Leaflet MarkerCluster and Esri Leaflet Cluster from CDN -->
   <link rel="stylesheet" type="text/css"
     href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
@@ -34,7 +41,11 @@
   <script src="https://unpkg.com/esri-leaflet-cluster@2.1.0/dist/esri-leaflet-cluster.js"
     integrity="sha512-fEdNFHisleVtEYdLhW4Z2RsR7TN6hLutE/+O4D+skfTNY2rlHm8HOZARPWkdrFFy/+i2KjFxcZAKTUWaVfbV0g=="
     crossorigin=""></script>
-  <title>Web Trail Ontario</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.4/"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.css"/>
+  <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js"></script>
+  <title>Weather</title>
   <style>
     #map {
       position: absolute;
@@ -42,26 +53,62 @@
       bottom: 0;
       left: 0;
       right: 0;
+      height: 100%;
+        width: 82%;
     }
-    /* iframe {
+   
+     /* iframe {
       padding: 0;
       margin: 0;
       height: 100%;
       width: 100%;
     }*/
-  </style></head>
+  </style>
+   
+
+
+</head>
   <body>
+    
+    <div class="card border-primary mb-3 float-right" style="max-width: 15rem;">
+      <div class="card-header">Display Title</div>
+      <div class="card-body text-primary">
+        <h5 class="card-title">Display Caption/Title</h5>
+        <p class="card-text">Display content right here.
+          And many more items
+        </p>
+      </div>
+      <div class="card-header">Display Title</div>
+      <div class="card-body text-primary">
+        <h5 class="card-title">Display Caption/Title</h5>
+        <p class="card-text">Display data to be gotten from server or map here</p>
+      </div>
+    </div>
+
+
+   
+      
+ 
+
+  
+  
+     <!--<div class="card-body"> <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div>
+      <div class="col-12"> <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div> -->
+ 
+    
     <div id ="map"></div>
     <script>
+      var map = L.map('map',{
+      center: [51.2538, -85.3232],
+      zoom: 5,
+      });
+
+      street = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6mxp190h7517pro7utdo12/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {id: 'OpenStreetMap', tileSize: 512, zoomOffset: -1, accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA',
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'}).addTo(map);
+
+     
       
-      var Grayscale = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn0olocs1bbp17mua8bvhe6u/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 32,
-      id: 'mapbox/streets-v11',
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA'
-    }),
+
       Satellite = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6onb8v0it818pbrvng7mql/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 32,
@@ -69,40 +116,44 @@
       tileSize: 512,
       zoomOffset: -1,
       accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA'
-    }),
-      street = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6mxp190h7517pro7utdo12/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {id: 'OpenStreetMap', tileSize: 512, zoomOffset: -1, accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA',
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'});
+    }).addTo(map);
+        L.control.scale().addTo(map);
+        
 
-   
-
-      
-        var Temperature = (new L.tileLayer("http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550")),
+       
+   var Temperature = (new L.tileLayer("http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550")),
       wind = (new L.tileLayer("http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550"));
-     
-      
-
-    
-     var map = L.map('map',{
-    	center: [51.2538, -85.3232],
-    	zoom: 6,
-    	layers: [Satellite, Temperature] });
-     var baseMaps = {
-     	"Grayscale": Grayscale,
-     	"Satellite": Satellite,
-     	"Streets": street
-    	
-    	
+ 
+      var baseMaps = {
+        "Satellite": Satellite,
+        "Street": street
+        
+       
     };
-
+    
+    
      var overlays = {
-    
     "Air Temperature" : Temperature,
-    "Wind Speed" : wind
-    
-
+    "Wind Speed" : wind,
     };
-    L.control.layers(baseMaps, overlays, {collapsed:false}).addTo(map);
-     
+    L.control.layers( baseMaps, overlays, {collapsed:false}).addTo(map);
+  
+   
+   /* 'https://github.com/aaronjutzi/Fahrenheit2101/blob/main/img/logo_blue.png' */
+
+   var logo = L.control({
+    position: 'bottomright',
+        height: '50px',
+        width: '50px',
+        target: '_self'
+    });
+    logo.onAdd = function(map){
+        var div = L.DomUtil.create('div', 'myclass');
+        div.innerHTML= "<img src='https://aaronjutzi.github.io/Fahrenheit2101/img/rsz_logo_green.png'/>";
+        return div;
+    }
+    logo.addTo(map);
     </script>
+   
   </body>
 </html>
