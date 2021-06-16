@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""/>
@@ -22,31 +24,19 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     crossorigin=""></script>
 
   <!-- Load Esri Leaflet from CDN -->
-  <script src="https://unpkg.com/esri-leaflet@3.0.1/dist/esri-leaflet.js"
-    integrity="sha512-JmpptMCcCg+Rd6x0Dbg6w+mmyzs1M7chHCd9W8HPovnImG2nLAQWn3yltwxXRM7WjKKFFHOAKjjF2SC4CgiFBg=="
-    crossorigin=""></script>
-   
-    
   <!-- Load Leaflet MarkerCluster and Esri Leaflet Cluster from CDN -->
-  <link rel="stylesheet" type="text/css"
-    href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
-    integrity="sha512-BBToHPBStgMiw0lD4AtkRIZmdndhB6aQbXpX7omcrXeG2PauGBl2lzq2xUZTxaLxYz5IDHlmneCZ1IJ+P3kYtQ=="
-    crossorigin="">
+  
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
     integrity="sha512-RLEjtaFGdC4iQMJDbMzim/dOvAu+8Qp9sw7QE4wIMYcg2goVoivzwgSZq9CsIxp4xKAZPKh5J2f2lOko2Ze6FQ=="
     crossorigin="">
-  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"
-    integrity="sha512-MQlyPV+ol2lp4KodaU/Xmrn+txc1TP15pOBF/2Sfre7MRsA/pB4Vy58bEqe9u7a7DczMLtU5wT8n7OblJepKbg=="
-    crossorigin=""></script>
-  <script src="https://unpkg.com/esri-leaflet-cluster@2.1.0/dist/esri-leaflet-cluster.js"
-    integrity="sha512-fEdNFHisleVtEYdLhW4Z2RsR7TN6hLutE/+O4D+skfTNY2rlHm8HOZARPWkdrFFy/+i2KjFxcZAKTUWaVfbV0g=="
-    crossorigin=""></script>
-    <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
-  <script src="https://js.arcgis.com/4.4/"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.css"/>
   <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js"></script>
   <title>Weather</title>
   <style>
+    html,body {
+    height: 100%; 
+    
+}
     #map {
       position: absolute;
       top: 0;
@@ -55,6 +45,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
       right: 0;
       height: 100%;
         width: 82%;
+      margin-top: 69px;
     }
    
      /* iframe {
@@ -69,7 +60,29 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 </head>
   <body>
-    
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"><img alt ='logo' src="https://aaronjutzi.github.io/Fahrenheit2101/img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarResponsive">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+          <div class="navbar-collapse collapse"  id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="map.html"><strong> Map</strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="method.html"><strong> Method </strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html"><strong> Contact </strong></a>
+              </li>
+            </ul>
+          </div>
+      
+  </nav>
     <div class="card border-primary mb-3 float-right" style="max-width: 15rem;">
       <div class="card-header">Display Title</div>
       <div class="card-body text-primary">
