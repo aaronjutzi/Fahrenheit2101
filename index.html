@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Weather Forecast</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" 
@@ -13,7 +13,7 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
-	<!-- Bootsrap Links -->
+    <!-- Bootsrap Links -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -58,7 +58,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
         bottom: 100px;
     
     }*/
-	#container{
+    #container{
       display: block;
       width: 90vw;
       height: calc(.75 * 90vw);
@@ -68,33 +68,27 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
       margin: 1em auto;
     }
     
-    #map {
+    
+    /*{
+      position: absolute;
+      top: 100px;
+  right: 40px;
+  width: 1200px;
+  height: 700px;
+  border: 2px solid #73AD21; }
+  #map {
+
       position: absolute;
       height: inherit; 
         width: inherit;
-      /*top: 0;
+      top: 0;
       bottom: 0;
       left: 260px;
       right: 0;
       height: 100%;
       width: 83.5%;
       margin-top: 69px; */
-    }
-    #pan{
-      position: absolute;
-      top: 100px;
-  left: 40px;
-    }
-    #pan2{
-      position: absolute;
-      top: 300px;
-  left: 40px;
-    }
-    #pan3{
-      position: absolute;
-      top: 500px;
-  left: 40px;
-    }
+    
     </style>
 </head>
 <body>
@@ -103,7 +97,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 <!-- Nav bars -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
+        <a class="navbar-brand" href="index.html"><img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50"><strong>Ontario Weather</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
         data-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
@@ -112,7 +106,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
         <div class="navbar-collapse collapse"  id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="map.html"><strong> Map</strong></a>
+              <a class="nav-link" href="index.html"><strong> Forecast</strong></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="method.html"><strong> Method </strong></a>
@@ -124,73 +118,65 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
         </div>
     
 </nav>
-    
+
+  
+
+   <!-- id="navbarResponsive" --> 
 <div class="background">
 <div class="push"></div>
-	
+<div id="container">
+  <div id ="map"></div></div>
+  <script>
+    var map = L.map('map',{
+    center: [51.2538, -85.3232],
+    zoom: 5,
+    });
+
+    street = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6mxp190h7517pro7utdo12/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {id: 'OpenStreetMap', tileSize: 512, zoomOffset: -1, accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA',
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'}).addTo(map);
 
    
+    
+
+    Satellite = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6onb8v0it818pbrvng7mql/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 32,
+    id: 'satellite',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA'
+  }).addTo(map);
+      L.control.scale().addTo(map);
       
- 
-
-  
-  
-     <!--<div class="card-body"> <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div>
-      <div class="col-12"> <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div> -->
- 
-    <div id="container">
-    <div id ="map"></div></div>
-    <script>
-      var map = L.map('map',{
-      center: [51.2538, -85.3232],
-      zoom: 5,
-      });
-
-      street = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6mxp190h7517pro7utdo12/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {id: 'OpenStreetMap', tileSize: 512, zoomOffset: -1, accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA',
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'}).addTo(map);
 
      
+ var Temperature = (new L.tileLayer("http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550")),
+    wind = (new L.tileLayer("http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550"));
+
+    var baseMaps = {
+      "Satellite": Satellite,
+      "Street": street
       
-
-      Satellite = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6onb8v0it818pbrvng7mql/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 32,
-      id: 'satellite',
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA'
-    }).addTo(map);
-        L.control.scale().addTo(map);
-        
-
-       
-   var Temperature = (new L.tileLayer("http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550")),
-      wind = (new L.tileLayer("http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550"));
- 
-      var baseMaps = {
-        "Satellite": Satellite,
-        "Street": street
-        
-       
-    };
-    
-    
-     var overlays = {
-    "Air Temperature" : Temperature,
-    "Wind Speed" : wind,
-    };
-    L.control.layers( baseMaps, overlays, {collapsed:true}).addTo(map);
+     
+  };
   
-   
-   /* 'https://github.com/aaronjutzi/Fahrenheit2101/blob/main/img/logo_blue.png' */
+  
+   var overlays = {
+  "Air Temperature" : Temperature,
+  "Wind Speed" : wind,
+  };
+  L.control.layers( baseMaps, overlays, {collapsed:true}).addTo(map);
 
  
-    </script>
+ /* 'https://github.com/aaronjutzi/Fahrenheit2101/blob/main/img/logo_blue.png' */
+
+
+  </script>
 <!--- Footer -->
 <div class="footer fixed-bottom">
     <div class="container-fluid padding">
     <div class="row text-center">
-      <div class="col-12">
+      <div class="col-">
         <hr class="light">
         <h5>&copy; Fahrenheit 2021</h5>
       </div>
