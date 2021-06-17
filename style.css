@@ -21,7 +21,22 @@ html, body{
   padding-bottom: 2rem;
 }
 
-
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .map {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .pad, .pad1, .pad2 {
+    width: 100%;
+  }
+}
 
 /*---Media Queries --*/
 @media (max-width: 992px) {
