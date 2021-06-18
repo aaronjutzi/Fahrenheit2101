@@ -1,192 +1,203 @@
-<!DOCTYPE html>
 <html>
-<head>
+	<head>
+	
+			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+		  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		  crossorigin=""/>
+	  
+		 <!-- Make sure you put this AFTER Leaflet's CSS -->
+		 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		   crossorigin=""></script>
+		   	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+		 
+		 <style>  
+			#mapid { height: 100%;
+                width: 75%;}
+				
+			#temp {
+				 width:20%;
+                		 float: left;
+				 position: absolute; 
+				 top: 190px; 
+				 right: 15px; 
+				 text-align: right;
+			 }
+		 </style> 
+	</head>
+	<body>
+	
+		<div id="mapid"></div>
+		<div>
+			<p id="temp"></p>
+		</div>
+		<script>
+		
+		
+        // Creating the map variable and setting zoom and coordinates to Ontario, Canada     
+		var map = L.map('mapid').setView([51.2538, -85.3232], 5);
+		
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 19,
+			id: 'mapbox/streets-v11',
+			tileSize: 512,
+			zoomOffset: -1,
+			accessToken: 'pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg'
+		}).addTo(map);
+		
+		
+		function roundUp(x, num)
+		{
+			return Math.ceil(x/num)*num;
+		}
+		
+		var customFloor = function(value, roundTo) {
+		return Math.floor(value / roundTo) * roundTo;
+		}
+		
+		
+		map.on('click', function(layer){
+		  var latlng = map.mouseEventToLatLng(layer.originalEvent);
+		  console.log(latlng.lat + ', ' + latlng.lng);
+		  //console.log('lat round down: ' + (Math.floor(latlng.lat * 10)/10) + ' lon round down: ' + (Math.floor(latlng.lng * 10)/10));
+		  //console.log('lat round up: ' + (Math.round(latlng.lat * 10)/10) + ' lon round up: ' + (Math.round(latlng.lng * 10)/10));
+		  //console.log(String(customFloor((latlng.lng), 0.4)).replace(".","").replace("-","") + String(RoundTo((latlng.lat), 0.4)).replace(".","") 
+		  //+ String(RoundTo((latlng.lng), 0.4)).replace(".","").replace("-","") + String(customFloor((latlng.lat), 0.4)).replace(".",""));
+		  
+		  var left = (String(customFloor((latlng.lng), 0.4)).replace(".","").replace("-","")).substring(0,3),
+		  top =  (String(roundUp((latlng.lat), 0.4)).replace(".","").substring(0,3)),
+		  right = (String(roundUp((latlng.lng), 0.4)).replace(".","").replace("-","")).substring(0,3),
+		  bottom = (String(customFloor((latlng.lat), 0.4)).replace(".","")).substring(0,3);
+		  
+		  console.log('left: ' + left);
+		  console.log('top: ' + top);
+		  console.log('right: ' + right);
+		  console.log('bottom: ' + bottom);
+		  console.log('grid_tilename_G' + left + top + right + bottom);
+		  tile = left + top + right + bottom
+		  //console.log(String(RoundTo((latlng.lng), 0.4)).replace(".","").replace("-",""));
+		  
+		  // left top right bottom
+		  //
+		  //$.get( "https://raw.githubusercontent.com/aaronjutzi/Fahrenheit2101/main/grid_tilename_G7844447844.geojson", function( data ) {
+		  
+		  
+		  
+		  $.ajax({ 
+		  
+		  type: "GET",
+		  url: "http://104.245.145.251:50780/documents/grid_tilename_G" + tile + ".geojson", 
+		  dataType: 'jsonp',
+		  
+		  
+		  
+		  sucess:function( data ) {
+		  //https://raw.githubusercontent.com/aaronjutzi/Fahrenheit2101/main/grid_tilename_G792448788444.geojson
+		  
+		  //console.log(data);
+		  //var obj  = JSON.stringify(data);
+		  var obj = JSON.parse(data);
+		  
+		  
+		  console.log(obj.features.length);
+		  
+		  obj_len = obj.features.length;
+		  d = 'empty'
+		  for (i = 0; i < obj_len; i++){
+			
+			console.log('b: ' + (obj.features[i].properties.top - latlng.lat));
+			console.log('c: ' + (obj.features[i].properties.left - latlng.lng));
+			
+			b = obj.features[i].properties.top - latlng.lat;
+			c = obj.features[i].properties.left - latlng.lng;
+			
+			console.log(Math.sqrt((b**2) + (c**2)));
+			
+			a = Math.sqrt((b**2) + (c**2))
+			
+			
+			if (d !== 'empty') {
+				if (a < d){
+				d = a;
+				x = i;} else {
+				d = d;}
+			} else {
+			d = a
+			x = i}
+			}
+			
+			
+			
+		  
+		  console.log('d: ' + d);
+		  console.log('i: ' + x);
+		  
+		  console.log(obj.features[0].properties.left);
+		  console.log(obj.features[0].properties.top);
+		  document.getElementById("temp").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
+		  "Current weather: " + obj.features[x].properties.temp1 + " °C"
+		  }
+		});
+		});
+		  
+		  
+		  
+		  
+		  
+		  /*
+		  $.get( "http://104.245.145.251:50780/documents/grid_tilename_G" + tile + ".geojson", function( data ) {
+		  //https://raw.githubusercontent.com/aaronjutzi/Fahrenheit2101/main/grid_tilename_G792448788444.geojson
+		  
+		  //console.log(data);
+		  //var obj  = JSON.stringify(data);
+		  var obj = JSON.parse(data);
+		  
+		  
+		  console.log(obj.features.length);
+		  
+		  obj_len = obj.features.length;
+		  d = 'empty'
+		  for (i = 0; i < obj_len; i++){
+			
+			console.log('b: ' + (obj.features[i].properties.top - latlng.lat));
+			console.log('c: ' + (obj.features[i].properties.left - latlng.lng));
+			
+			b = obj.features[i].properties.top - latlng.lat;
+			c = obj.features[i].properties.left - latlng.lng;
+			
+			console.log(Math.sqrt((b**2) + (c**2)));
+			
+			a = Math.sqrt((b**2) + (c**2))
+			
+			
+			if (d !== 'empty') {
+				if (a < d){
+				d = a;
+				x = i;} else {
+				d = d;}
+			} else {
+			d = a
+			x = i}
+			}
+			
+			
+			
+		  
+		  console.log('d: ' + d);
+		  console.log('i: ' + x);
+		  
+		  console.log(obj.features[0].properties.left);
+		  console.log(obj.features[0].properties.top);
+		  document.getElementById("temp").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
+		  "Current weather: " + obj.features[x].properties.temp1 + " °C"
+		  
+		});
+		});
+		
+		*/
+		</script>
 
-
-<!-- Bootsrap Links -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-      crossorigin=""/>
-  
-     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-       crossorigin=""></script>
-       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
-
-  <!-- Load Esri Leaflet from CDN -->
-  <!-- Load Leaflet MarkerCluster and Esri Leaflet Cluster from CDN -->
-  
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
-    integrity="sha512-RLEjtaFGdC4iQMJDbMzim/dOvAu+8Qp9sw7QE4wIMYcg2goVoivzwgSZq9CsIxp4xKAZPKh5J2f2lOko2Ze6FQ=="
-    crossorigin="">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.css"/>
-  <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js"></script>
-  <title>Weather</title>
-  <style>
-  
-    #map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 100%;
-        width: 82%;
-      margin-top: 69px;
-    }
-    #pan{
-      float: right;
-    }
-   
-     /* iframe {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width: 100%;
-    }*/
-  </style>
-   
-
-
-</head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-      <div class="container-fluid">
-          <a class="navbar-brand" href="index.html"><img alt ='logo' src="https://aaronjutzi.github.io/Fahrenheit2101/img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarResponsive">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-      </div>
-          <div class="navbar-collapse collapse"  id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="map.html"><strong> Map</strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="method.html"><strong> Method </strong></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html"><strong> Contact </strong></a>
-              </li>
-            </ul>
-          </div>
-        </nav> 
- <!-- <div class="card border-primary mb-3 " id='pan' style="max-width: 15rem;"> 
-      <div class="card-header">Display Title</div>
-      <div class="card-body text-primary">
-        <h5 class="card-title">Display Caption/Title</h5>
-        <p class="card-text">Display content right here.
-          And many more items
-        </p>
-      </div>
-      <div class="card-header">Display Title</div>
-      <div class="card-body text-primary">
-        <h5 class="card-title">Display Caption/Title</h5>
-        <p class="card-text">Display data to be gotten from server or map here</p>
-      </div>
-    </div> -->
-    <div class="d-flex align-items-end flex-column" >
-    <div class="card text-white bg-danger mb-3" id='pan' style="max-width: 16rem;">
-      <div class="card-header">Add header Here</div>
-      <div class="card-body">
-        <h5 class="card-title">Display Title</h5>
-        <p class="card-text">Display data to be gotten from server or map here</p>
-      </div></div>
-      <div class="card text-white bg-info mb-3" id='pan'style="max-width: 16rem;">
-        <div class="card-header">Add Header Here</div>
-        <div class="card-body">
-          <h5 class="card-title">Display Title</h5>
-          <p class="card-text">Display data to be gotten from server or map here</p>
-        </div>
-      </div>
-      <div class="card text-white bg-success mb-3" style="max-width: 16rem;">
-        <div class="card-header">Add caption if needed.</div>
-        <div class="card-body">
-          <h5 class="card-title">Display Title</h5>
-          <p class="card-text">Display data to be gotten from server or map here</p>
-        </div>
-      </div>
-    </div>
-
-   
-      
- 
-
-  
-  
-     <!--<div class="card-body"> <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div>
-      <div class="col-12"> <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div> -->
- 
-    
-    <div id ="map"></div>
-    <script>
-      var map = L.map('map',{
-      center: [51.2538, -85.3232],
-      zoom: 5,
-      });
-
-      street = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6mxp190h7517pro7utdo12/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {id: 'OpenStreetMap', tileSize: 512, zoomOffset: -1, accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA',
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'}).addTo(map);
-
-     
-      
-
-      Satellite = L.tileLayer('https://api.mapbox.com/styles/v1/reeltoby/ckn6onb8v0it818pbrvng7mql/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 32,
-      id: 'satellite',
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken: 'pk.eyJ1IjoicmVlbHRvYnkiLCJhIjoiY2ttdGMzbXhsMHFoejJucG5qcXE3bHcwYiJ9.7eI2ScGwQiYs7DZUduN4NA'
-    }).addTo(map);
-        L.control.scale().addTo(map);
-        
-
-       
-   var Temperature = (new L.tileLayer("http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550")),
-      wind = (new L.tileLayer("http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=6a7e01daf992d16cd943dae3b79d1550"));
- 
-      var baseMaps = {
-        "Satellite": Satellite,
-        "Street": street
-        
-       
-    };
-    
-    
-     var overlays = {
-    "Air Temperature" : Temperature,
-    "Wind Speed" : wind,
-    };
-    L.control.layers( baseMaps, overlays, {collapsed:false}).addTo(map);
-  
-   
-   /* 'https://github.com/aaronjutzi/Fahrenheit2101/blob/main/img/logo_blue.png' */
-
-   var logo = L.control({
-    position: 'bottomright',
-        height: '50px',
-        width: '50px',
-        target: '_self'
-    });
-    logo.onAdd = function(map){
-        var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<img src='https://aaronjutzi.github.io/Fahrenheit2101/img/rsz_logo.png'/>";
-        return div;
-    }
-    logo.addTo(map);
-    </script>
-   
-  </body>
+	</body>
 </html>
