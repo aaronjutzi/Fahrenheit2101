@@ -17,6 +17,43 @@ html, body{
   font-size: 0.9 em !important;
 }
 
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+
+}
+.carousel-caption {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+}
+.carousel-caption h1 {
+  font-size: 500%;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 10px #000;
+}
+
+.carousel-caption h3 {
+  font-size: 200%;
+  font-weight: 500;
+  text-shadow: 1px 1px 10px #000;
+}
+
+.padding {
+  padding-bottom: 2rem;
+}
+.welcome {
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+.welcome hr {
+  border-top: 2px solid #b4b4b4;
+  width: 95%;
+  margin-top: .3rem;
+  margin-bottom: 1rem;
+}
+
 
 @media only screen and (max-width:800px) {
   /* For tablets: */
@@ -81,6 +118,21 @@ html, body{
   
 }
 
+/*---Firefox Bug Fix --*/
+.carousel-item {
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+/*--- Fixed Background Image --*/
+figure {
+  position: relative;
+  width: 100%;
+  height: 60%;
+  margin: 0!important;
+}
 
 .fixed-wrap {
   clip: rect(0, auto, auto, 0);
@@ -89,6 +141,21 @@ html, body{
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+#fixed {
+  background-image: url('img/mac.png');
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  will-change: transform;
 }
 
 /*--- Bootstrap Padding Fix --*/
