@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,77 +11,6 @@
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
   <link href="style.css" rel="stylesheet">
 
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-      crossorigin=""/>
-  
-     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-       crossorigin=""></script>
-       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
-
-  <!-- Load Esri Leaflet from CDN -->
-  <!-- Load Leaflet MarkerCluster and Esri Leaflet Cluster from CDN -->
-  
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
-    integrity="sha512-RLEjtaFGdC4iQMJDbMzim/dOvAu+8Qp9sw7QE4wIMYcg2goVoivzwgSZq9CsIxp4xKAZPKh5J2f2lOko2Ze6FQ=="
-    crossorigin="">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.css"/>
-  <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js"></script>
-    <style type="text/css">
-    body{
-        background-image: url("img/toronto1.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        margin: 0 auto;
-        color: white;
-    }
-    /*.background {
-        position: absolute;
-        min-height: 100vh;
-        min-width: 100vw;
-        top: 0;
-        bottom: 100px;
-    
-    }*/
-    #container{
-      display: block;
-      width: 90vw;
-      height: calc(.75 * 90vw);
-      max-width: 1000px;
-      max-height: 600px;
-
-      margin: 1em auto;
-    }
-    
-    
-    /*{
-      position: absolute;
-      top: 100px;
-  right: 40px;
-  width: 1200px;
-  height: 700px;
-  border: 2px solid #73AD21; }
-  #map {
-      position: absolute;
-      height: inherit; 
-        width: inherit;
-      top: 0;
-      bottom: 0;
-      left: 260px;
-      right: 0;
-      height: 100%;
-      width: 83.5%;
-      margin-top: 69px; */
-    
-    </style>
 </head>
 <body>
 
@@ -90,7 +18,7 @@
 <!-- Nav bars -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
   <div class="container-fluid">
-      <a class="navbar-brand" href="home.html"><img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
+      <a class="navbar-brand" href="index.html"><img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarResponsive">
           <span class="navbar-toggler-icon"></span>
@@ -113,19 +41,22 @@
       </div>
 </nav>
 
-  
 
-   <!-- id="navbarResponsive" --> 
-<div class="background">
-<div class="push"></div>
-<div id="container">
-  
   
 <!--- Footer -->
 <footer>
   <div class="footer fixed-bottom"></div>
   <div class="container-fluid padding">
   <div class="row text-center">
+    <div class="col-md-4">
+      <img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50">
+    </div>
+    <div class="col-md-4">
+      <img alt ='logo' src="img/arubrum.png" width="110" height="50">
+    </div>
+    <div class="col-md-4">
+      <img src="img/fleminglogo.png" alt= "fleming">
+    </div>
     <div class="col-12">
       <hr class="light">
       <h5>&copy; Fahrenheit 2021</h5>
