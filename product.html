@@ -54,30 +54,30 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
       
      }
      div.transbox {
-      position:relative;
-      float: right;
-      margin-top:20px; 
-      bottom:0; 
-      width:5%;
+      margin: 10px;
+  				background-color: #E2F0F4;
+  				
+  				float: left;
+				  width: 20%;
+				  position: absolute; 
+				 top: 90px; 
+				 right: 15px; 
+				 text-align: left;
       
       height: calc(.75 * 90vw);
      
       max-height: 600px;
-      padding-left: 450px;
-      padding-right: 20px;
+      
+    
       opacity: 0.6;
-      background-color: #ffffff;
-    border: 4px solid black;
+     /* background-color: #ffffff;*/
+      border: 4px solid black;
 
  
   
 }
 
-div.info {
-  margin: 5%;
-  font-weight: bold;
-  color: #fdfdfd00;
-}
+
     /*.background {
         position: absolute;
         min-height: 100vh;
@@ -104,25 +104,18 @@ div.info {
 	padding: 5px 15px;
 	background-color: rgba(0, 0, 0, 0.6);
 	color: lightgray;
-	text-align: left;
-}
-#search{
-  float: right;
-  padding: 6px;
-  margin-top: 45px;
-  margin-right: 16px;
-  border: none;
-  font-size: 17px;
-  padding-right: 150px
+	text-align: right;
 }
 .ui-control {
-  background:#fff;
-  position:absolute;
+  background:#E2F0F4;
+  position:static;
   top:10px;
   right:10px;
   padding:10px;
   z-index:100;
   border-radius:3px;
+  opacity: 0.6;
+  text-align: left;
   }
     /*{
       position: absolute;
@@ -245,12 +238,11 @@ div.info {
 
   </script>
   <div class="transbox">
-    <div class='info'>
-    <p><h2>Weather Information</h2></p>
-  </div>
   <div id='output' class='ui-control'>
-    Click: <code id='click'></code><br/>
-    Mousemove: <code id='mousemove'></code><br/>
+
+    <p style="background-color:rgb(71, 114, 255);">Mousemove: </p><code id='mousemove'></code><br/>
+    <p style="background-color:rgb(71, 114, 255);">Click: </p><code id='click'></code><br/>
+    
   </div>
 </div>
 <!--- Footer -->
