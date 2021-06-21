@@ -42,7 +42,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     }
     #map { position:absolute; 
       top:105px; 
-      right: 22px;
+      left: 22px;
       bottom:0; 
       width:90%;
       width: 90vw;
@@ -53,6 +53,31 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
       padding-right: 20px;
       
      }
+     div.transbox {
+      position:relative;
+      float: right;
+      margin-top:20px; 
+      bottom:0; 
+      width:5%;
+      
+      height: calc(.75 * 90vw);
+     
+      max-height: 600px;
+      padding-left: 450px;
+      padding-right: 20px;
+      opacity: 0.6;
+      background-color: #ffffff;
+    border: 4px solid black;
+
+ 
+  
+}
+
+div.info {
+  margin: 5%;
+  font-weight: bold;
+  color: #fdfdfd00;
+}
     /*.background {
         position: absolute;
         min-height: 100vh;
@@ -209,7 +234,10 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 
   </script>
-  
+  <div class="transbox">
+    <div class='info'>
+    <p><h2>Weather Information</h2></p>
+  </div></div>
 <!--- Footer -->
 <div class="footer fixed-bottom">
     <div class="container-fluid padding">
