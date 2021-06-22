@@ -39,6 +39,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
         margin: 0 auto;
         color: white;
         font-size: 150%;
+        
     }
     #map { position:absolute; 
       top:105px; 
@@ -114,7 +115,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
   padding:10px;
   z-index:100;
   border-radius:3px;
-  opacity: 0.6;
+  
   text-align: left;
   }
     /*{
@@ -226,22 +227,33 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
       
 
   map.on('mousemove click', function(e) {
-    window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();
+    //window[e.type].innerHTML = e.containerPoint.toString() + ', ' + e.latlng.toString();
+    window[e.type].innerHTML = e.latlng.toString();
+    
 });
   
  
 
 
  
- /* 'https://github.com/aaronjutzi/Fahrenheit2101/blob/main/img/logo_blue.png' */
+
 
 
   </script>
   <div class="transbox">
   <div id='output' class='ui-control'>
-
-    <p style="background-color:rgb(71, 114, 255);">Mousemove: </p><code id='mousemove'></code><br/>
-    <p style="background-color:rgb(71, 114, 255);">Click: </p><code id='click'></code><br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+      <p style="background-color:rgb(5, 22, 75); color:white; font-size: 80%;"><strong>Mousemove: </strong></p><strong><code id='mousemove' style='font-size: 70%;color:rgb(2, 14, 46);'></code></strong><br/>
+      <p style="background-color:rgb(5, 22, 75); color:white; font-size: 80%;"><strong>Click: </strong></p><strong><code id='click' style='font-size: 70%; color:rgb(2, 14, 46);'></code></strong><br/>
+      
+    </div>
     
   </div>
 </div>
