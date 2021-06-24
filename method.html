@@ -75,9 +75,14 @@
       URLLIB module, unzips the downloaded file, and converts it to a text file.
     </p>  
   
-    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);">WRITING THE WEATHER DATA INTO POSTGRESQL DATABASE AND CSV FILE </h4></div>
+   <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);">PYQGIS </h4></div>
     <p class="text-justify">
-  
+      PyQGIS is a framework that allows you to run QGIS processes in python. To run QGIS processes in python, 
+      we needed to set our python interpreter to the python-qgis.bat interpreter. The same python script used in the ETL procedures above 
+      automates the interpolation process using PyQGIS by first converting the CSV file into a point layers, coverting the numerical columns stored
+      as string to double, adds new columns to store the temperature and wind numerical values. The script then performs a series of IDW interpolations
+      for both temperature and wind over the nine different regions of our study area.
+
     </p>
     
     
