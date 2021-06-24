@@ -47,34 +47,32 @@
     <h2 class="text-center" style="color: brown;">Methodology: How we did it</h2></div>
     <div class="col-12"> <h4 class="text-justify" style="color: rgb(42, 165, 69);">PREPARING THE STUDY AREA </h4></div>
     <h5 style="color: rgb(165, 46, 42);" >Weather Stations:</h5>
-    <p class="text-justify">Weather stations within Ontario and within a 50km 
-        distance from the borders of Ontario were clipped for inclusion in the study area. 
-        The weather stations within 50km outside of the Ontario border were included in the study 
-        area to improve interpolation results near the edges of Ontario near Manitoba and Quebec.
+    <p class="text-justify">Weather stations within Ontario and a 50km 
+      distance from the borders of Ontario were clipped for inclusion in the study area. 
+      The weather stations within 50km outside of the Ontario border were included 
+      in the study area to improve interpolation results near the edges of Ontario near Manitoba and Quebec.
          </p>
 
          <h5 class="text-justify" style="color: rgb(165, 46, 42);">Map tiles: </h5>
          <p class="text-justify"> We created raster files automatically, using python scripts. 
-           After discovering that we could not query raster in Leaflet to fulfill our project purpose, 
-           we resolved to coverting the raster to GeoJSON files which would then be used to query for temperature and 
-           wind speed information in the mapping application.</br>
-           Rectangle tiles were created in QGIS using the create grid tool. Setting horizontal and vertical spacing to 0.4 degrees
-           ,and the extent was set to –100,0,0,60 (left, right, bottom, top). 
-           Point grid tiles were also created, with horizontal and vertical spacing set to 
-           0.04 degrees and the extent set to –100.02, 0.02, 0.02, 60.02. 
-           The 0.02 was added to the point extents to offset their locations not to overlap the rectangle grids. </br>
-           The goal here was to have GeoJSON files for each respective tile, and each of those files would hold the 
-           points that fall within the extents of that tile. Each GeoJSON files' name was the extent of the corresponding rectangle tile
-           concatenated with a "G" in front. This rectangle points and grids were then spatially joined to have the grid tile name added to 
-           the point grid layer, splitting the vector layers in separate GeoJSON files according to grid tile name every hour.
+          After discovering that we could not query raster in Leaflet to fulfill our project purpose, 
+          we resolved to convert the raster to GeoJSON files which would then be used to query for temperature and wind speed information in the mapping application.</br>
+          Rectangle tiles were created in QGIS using the create grid tool. Setting horizontal and vertical spacing to 0.4 degrees
+          ,and the extent was set to –100,0,0,60 (left, right, bottom, top). 
+          Point grid tiles were also created, with horizontal and vertical spacing set to 
+          0.04 degrees and the extent set to –100.02, 0.02, 0.02, 60.02. 
+          The 0.02 was added to the point extents to offset their locations not to overlap the rectangle grids. </br>
+          The goal here was to have GeoJSON files for each respective tile, and each of those files would hold the points that fall within the extents of that tile. Each GeoJSON files' name was the extent of the corresponding rectangle tile concatenated with a "G" in front. These rectangle points and grids were then spatially joined to have the grid tile name added to 
+          the point grid layer, splitting the vector layers into separate GeoJSON files according to the grid tile name every hour.
            </p>
     
     <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);" > RETRIEVING THE RAW WEATHER DATA </h4></div>
-    <p class="text-justify">We created two CSV files holding the latitude, longitude and station codes of weather stations within our
-      study area. These files would then be used in the ETL automation script. The script downloads hourly weather station data from 
-      from this Government of Canada website: 'https://dd.weather.gc.ca/nowcasting/matrices/' using the python URLLIB module, unzips the 
-      downloaded file and converts it to a text file.
-
+    <p class="text-justify">We created two CSV files holding the latitude, 
+      longitude, and station codes of weather stations within our study area. 
+      These files would then be used in the ETL automation script. 
+      The script downloads hourly weather station data from this Government of 
+      Canada website: 'https://dd.weather.gc.ca/nowcasting/matrices/' using the python 
+      URLLIB module, unzips the downloaded file, and converts it to a text file.
     </p>  
   
     <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);">WRITING THE WEATHER DATA INTO POSTGRESQL DATABASE AND CSV FILE </h4></div>
