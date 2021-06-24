@@ -82,37 +82,9 @@
     }
   }
   </style>
-<body>
-
-
-<!-- Nav bars -->
-<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-  <div class="container-fluid">
-      <a class="navbar-brand" href="index.html"><img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-      data-target="#navbarResponsive">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-  </div>
-      <div class="navbar-collapse collapse"  id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-     <a class="nav-link" href="index.html"><strong> Home </strong></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="method.html"><strong> Methodology </strong></a>
-          </li>
-    <li class="nav-item">
-            <a class="nav-link" href="product.html"><strong> Product </strong></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="contact.html"><strong> Contact </strong></a>
-          </li>
-        </ul>
-      </div>
-</nav>
-<?php
+  <?php
 if($_POST && isset($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['phone']))
-
+  {
   $email_to = "toby.chidi@hotmail.com";
   $email_subject = "Project inquiry from Web";
   $fname = $_POST['firstName'];
@@ -155,10 +127,39 @@ mail($email_to, $email_subject, $email_message, $headers);
       }
  
                           
-            
+}  
                           
                           
                           ?>
+<body>
+
+
+<!-- Nav bars -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  </div>
+      <div class="navbar-collapse collapse"  id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+     <a class="nav-link" href="index.html"><strong> Home </strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="method.html"><strong> Methodology </strong></a>
+          </li>
+    <li class="nav-item">
+            <a class="nav-link" href="product.html"><strong> Product </strong></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="contact.html"><strong> Contact </strong></a>
+          </li>
+        </ul>
+      </div>
+</nav>
+
 
 
 
