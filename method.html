@@ -69,15 +69,19 @@
            the point grid layer, splitting the vector layers in separate GeoJSON files according to grid tile name every hour.
            </p>
     
-    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);" > Retrieving the raw weather data: </h4></div>
-    <p class="text-justify">
+    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);" > RETRIEVING THE RAW WEATHER DATA </h4></div>
+    <p class="text-justify">We created two CSV files holding the latitude, longitude and station codes of weather stations within our
+      study area. These files would then be used in the ETL automation script. The script downloads hourly weather station data from 
+      from this Government of Canada website: 'https://dd.weather.gc.ca/nowcasting/matrices/' using the python URLLIB module, unzips the 
+      downloaded file and converts it to a text file.
 
     </p>  
   
-    <div class="col-12"><h4 class="text-justify">Writing weather data to PostgreSQL database and CSV file: </h4></div>
+    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);">WRITING THE WEATHER DATA INTO POSTGRESQL DATABASE AND CSV FILE </h4></div>
     <p class="text-justify">
   
     </p>
+    
     
     <div class="col-12"><h4 class="text-justify"> Spatial Analysis, Interpolation Using QGIS and PyQGIS: </h4></div>
     <p class="text-justify">
