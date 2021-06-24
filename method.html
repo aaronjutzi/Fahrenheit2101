@@ -86,18 +86,47 @@
     </p>
     
     
-    <div class="col-12"><h4 class="text-justify"> Spatial Analysis, Interpolation Using QGIS and PyQGIS: </h4></div>
+   <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);"> SPATIAL ANALYSIS </h4></div>
     <p class="text-justify">
+      We split the province of Otario into nine sub-regions and generated interpolation models for all nine different sub-regions.  
+      This was done to improve the accuracy of the IDW interpolation model by limiting the interpolation model to 
+      only weather stations with a specific sub-region and not just general classification or aggregation of Weather station points.
 
     </p>
+    <img alt ='IDW' src="img/IDW.png" style="margin-left: auto; margin-right: auto;" ></br>
+    
     
     <div class="col-12">
-      
-        <h4 class="text-justify"> Project Results  </h4></div>
+      <p><h6 style="color: rgb(238, 10, 10);">Image showing Ontario divided into nine different regions</h6></p>
+        <h4 class="text-justify"> WEB DEVELOPMENT  </h4></div>
+        <p class="text-justify">
+          The Ontario weather web application displays weather information for all of Ontario. 
+          It has been designed to retrieve weather information stored on the server and report 
+          the current weather details according to the selected location. 
+          This is done by retrieving the GeoJSON files previously created, using jQuery. 
+          The jQuery GET function is initiated after a user selects a point on the map. 
+          When a user selects a point on the map the latitude and longitude coordinates are recorded and roundedboth up and down to the nearest 
+          0.4 degrees to get the corresponding tile extents. These values would then be concatenated to match the format of the GeoJSON files 
+          That concatenated file name would then be used in the jQuery request, which will bring in the GeoJSON file. Before the GeoJSON file can be used for its information, 
+          a single point must be selected from this file. There are typically 100 points in each of these files, 
+          and the point closest to the selected point must be selected to take the data from. 
+          This is done using a for loop that iterates through each record in the file and calculates the distance between each point and the selected point, 
+          using Pythagorean theorem. The index number of the closet point is saved, and then used to retrieve the location specific weather data. 
+          Once the script knows which point is the closest the script will display the corresponding weather information. 
+          This information is the current temperature and wind, and the forecasted temperature and wind values for the next 5 hours.
+        </p>
+
+        <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);"> PROJECT RESULT </h4></div>
     <p class="text-justify">
+      Using python for automating tasks turned out to work very well for our purposes. 
+      We were able to do all the pre-processing within a python script that automatically runs every hour (with task scheduler). 
+      This includes command line prompts (which originally, we were planning to do outside of python with PowerShell). 
+      The runtime of our entire python script takes approximately 80-90 seconds to complete. 
+      Once we set up our python pre-processing script, we created a batch file that runs this script at the top of every hour. 
+      If the script doesn’t find a corresponding URL, it will sleep for 5 minutes (and repeat until successful). 
+      The script runs smoothly, and most of the processing time revolves around the QGIS tools being run. 
 
-
-    </p>  
+    </p> 
   
   </div></div>
   
