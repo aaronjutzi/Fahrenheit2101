@@ -9,7 +9,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-  <link href="style.css" rel="stylesheet">
+  <link href="style2.css" rel="stylesheet">
 
 </head>
 <body>
@@ -44,19 +44,21 @@
 <div class="container-sm border ">
     <div class="row welcome text-center">
       <div class="col-12">
-    <h2 class="text-justify">Methodology: How we did it</h2></div>
-    <div class="col-12"> <h4 class="text-justify">Preparing the study area: </h4></div>
-    <p class="text-justify">Data pre-processing and setting up an extract, 
-        transfer, and load workflow (ETL) was the most arduous task undertaken in 
-        this project. Since the data pre-processing and the ETL processes are intertwined with 
-        each other they were included in the same methodology section here.
-        Weather station location data for all of Canada was acquired from a Government of Canada 
-        website and then preprocessed in QGIS. Weather stations within Ontario and within a 50km 
+    <h2 class="text-center" style="color: brown;">Methodology: How we did it</h2></div>
+    <div class="col-12"> <h4 class="text-justify">PREPARING THE STUDY AREA </h4></div>
+    <h5 style="color: rgb(165, 46, 42);" >Weather Stations:</h5>
+    <p class="text-justify">Weather stations within Ontario and within a 50km 
         distance from the borders of Ontario were clipped for inclusion in the study area. 
         The weather stations within 50km outside of the Ontario border were included in the study 
         area to improve interpolation results near the edges of Ontario near Manitoba and Quebec.
          </p>
-  
+
+         <h5 class="text-justify" style="color: rgb(165, 46, 42);">Map tiles: </h5>
+         <p class="text-justify"> We created raster files automatically, using python scripts. 
+           After discovering that we could not query raster in Leaflet to fulfill our project purpose, 
+           we resolved to coverting the raster to GeoJSON files which would then be used to query for temperature and 
+           wind speed information in the mapping application.
+           </p>
     
     <div class="col-12"><h4 class="text-justify" > Retrieving the raw weather data: </h4></div>
     <p class="text-justify">
