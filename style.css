@@ -28,15 +28,17 @@ html, body{
   transform: translateY(-50%);
 }
 .carousel-caption h1 {
-  font-size: 500%;
+  font-size: 300%;
   text-transform: uppercase;
   text-shadow: 1px 1px 10px #000;
+  color: white;
 }
 
 .carousel-caption h3 {
   font-size: 200%;
   font-weight: 500;
   text-shadow: 1px 1px 10px #000;
+  color: white;
 }
 
 .padding {
@@ -71,6 +73,11 @@ html, body{
     width: 100%;
   }
 }
+@media screen and (max-width: 600px) {
+  div.wrapper {
+    font-size: 30px;
+  }
+}
 
 /*---Media Queries --*/
 @media (max-width: 992px) {
@@ -81,13 +88,15 @@ html, body{
     top: 45%;
   }
   .carousel-caption h1 {
-    font-size: 350%;
+    font-size: 200%;
+	color: white;
   }
   
   .carousel-caption h3 {
-    font-size: 140%;
+    font-size: 150%;
     font-weight: 400;
     padding-bottom: 2rem;
+	color: white;
   }
   .carousel-caption .btn{
     font-size: 95%;
@@ -96,17 +105,22 @@ html, body{
   .display-4{
     font-size: 200%;
   }
+  .containerx{
+	top: 100px;
+	
+  }
 }
+
 @media (max-width: 576px) {
   .carousel-caption {
     top: 40%;
   }
   .carousel-caption h1 {
-    font-size: 250%;
+    font-size: 100%;
   }
   
   .carousel-caption h3 {
-    font-size: 110%;
+    font-size: 100%;
   }
   .carousel-caption .btn{
     font-size: 90%;
@@ -115,8 +129,21 @@ html, body{
   .carousle-indicators{
     display: none;
   }
-  
+  .containerx{
+	top: 150px;
+	
+	
+  }
 }
+
+.display-2x {
+    font-size: 5.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+	/*overflow: auto;*/
+}
+
+
 
 /*---Firefox Bug Fix --*/
 .carousel-item {
@@ -179,7 +206,25 @@ section{
   /*for status*/
   flex-direction: column;
 }
+/*#contactform {
+	position: sticky;
+}
+*/
+#contactforms {
+	top: 50%;
+}
 .container{
+  width: 90%;
+  height: 30%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0px 0px 20px #c0b3b310;
+  background-color: white;
+  border-radius: 8px;  
+}
+
+.containerx{
   width: 90%;
   max-width: 500px;
   margin: 0 auto;
@@ -187,7 +232,9 @@ section{
   box-shadow: 0px 0px 20px #c0b3b310;
   background-color: white;
   border-radius: 8px;
-  margin-bottom: 20px;
+  /*position: absolute;
+  margin-top: 250px;*/
+  overflow: auto;
 }
 
 .form-group{
@@ -262,3 +309,183 @@ button[type="submit"]:hover{
     pointer-events: none;
   }
 }
+
+
+
+#c_title {
+	float: top;
+}
+
+
+.flowdiagram {
+	border: 1px solid black;
+	padding: 5px;
+	width: 75%;
+	height: auto;
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid {
+	width:50%;
+	height: auto;
+}
+
+
+    .body1{
+        background-image: url("img/toronto1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0 auto;
+        color: black;
+        /*font-size: 150%;*/
+        
+    }
+    #mapid { 
+	position:absolute;
+      margin: 2%;
+	  margin-top: 2.5%;
+	  margin-left: 4%;
+	  width: 63%;
+	  height: 70%;
+      padding-top: 2%;
+	  padding-bottom: 2%;
+	  padding-left: 4%;
+      padding-right: 2%;
+	  opacity: 0.95;
+	  border: 3px solid black;
+      
+     }
+	 
+
+	 
+     div.transbox {
+      margin: 2%;
+  				
+  				
+  				float: right;
+				width: 23%;
+				position: absolute;
+				 right: 2%;
+				
+				
+				text-align: left;
+      overflow: auto;
+      height: 83%;
+	  padding-top: 2%;
+	  padding-bottom: 2%;
+	  padding-left: 2%;
+      padding-right: 2%;
+     
+     
+      
+    
+      
+	  background: rgba(226,240,244,.4);
+	  /*
+	  opacity: 1;
+	  background: rgba(225, 0, 0, .5);
+      background-color: #ffffff;*/
+      border: 4px solid black;
+ 
+}
+
+
+.leaflet-control-locate.active a {
+    color: #2074B6;
+	right: 50%;
+}
+
+.leaflet-touch .leaflet-bar a:last-child  {
+	padding-left: 0px;
+	padding-top: 1%;
+}
+
+
+
+
+#forecast {
+	color: black;
+}
+
+.ui-control {
+  /*background:#E2F0F4; 
+  position:static;*/
+  top: 1%;
+  right:1%;
+  padding:1%;
+  z-index:100;
+  border-radius:1%;
+}
+
+#buttons {
+	bottom: 1%;
+}
+
+
+#message {
+	color: black;
+	font-style: normal;
+}
+
+tr:hover {background-color: #ddd;}
+
+/*
+#temp tr {
+ background-color: rgba( 229, 57, 53, .7);
+}
+
+#wind tr {
+ background-color: rgba( 41, 182, 246, .8);
+}
+*/
+
+
+.head {
+	color: black;
+	font-style: normal;
+	font-weight: bold;
+}
+
+
+
+#temp tr {
+ background-color: rgba( 255, 255, 255, .7);
+}
+
+#wind tr {
+ background-color: rgba( 255, 255, 255, .7);
+}
+
+
+#ho0, #ho1, #ho2, #ho3, #ho4, #ho5, #ho0w, #ho1w, #ho2w, #ho3w, #ho4w, #ho5w {
+	color: black;
+	font-style: normal;
+} 
+
+#t0, #w0 {
+	font-weight: bold;
+	color: black;
+}
+
+#t1, #t2, #t3, #t4, #t5, #w1, #w2, #w3, #w4, #w5 {
+	color: black;
+	font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+	  
+	  
